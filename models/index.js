@@ -6,10 +6,6 @@ const ProductTag = require('./ProductTag');
 
 // Products belongsTo Category
 Product.belongsTo(Category, {
-  through: {
-    model: Trip,
-    unique: false
-  },
   foreignKey: 'category_id'
 });
 

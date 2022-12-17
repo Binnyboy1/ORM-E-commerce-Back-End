@@ -6,7 +6,7 @@ const { Category, Product } = require('../../models');
 router.get('/', async (req, res) => {
   // find all categories
   try {
-    const categoryData = Category.findAll({
+    const categoryData = await Category.findAll({
       // be sure to include its associated Products
       include: [{ model: Product }]
     });
@@ -25,7 +25,7 @@ router.get('/:id', async (req, res) => {
     });
 
     if (!categoryData) {
-      res.status(404).json({ message: 'No categiry found with that id!' });
+      res.status(404).json({ message: 'No category found with that id!' });
       return;
     }
 
@@ -48,7 +48,7 @@ router.post('/', async (req, res) => {
 router.put('/:id', async (req, res) => {
   // update a category by its `id` value
   try {
-    const categoryData = await Category.findByPk(req.params.id).update( req.body, { 
+    const categoryData = await Category.update( req.body, { 
       where: { 
         id: req.params.id 
       }
